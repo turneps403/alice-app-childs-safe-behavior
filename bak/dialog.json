@@ -1,0 +1,38 @@
+{
+    "start": {
+        "text": "",
+        "tts": ""
+    },
+    "place": [
+        {
+            "tokens": [],
+            "start": {
+                "text": "",
+                "tts": ""
+            },
+            "riddles": [
+                {
+                    "question": {
+                        "text": "",
+                        "tts": ""
+                    },
+                    "answers": [],
+                    "reaction": {
+                        "right": {
+                            "text": "",
+                            "tts": ""
+                        },
+                        "wrong": {
+                            "text": "",
+                            "tts": ""
+                        },
+                        "explanation": {
+                            "text": "",
+                            "tts": ""
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
