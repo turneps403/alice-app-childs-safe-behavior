@@ -4,6 +4,8 @@
 
 This app is implemented as a part of NLP Master's degree program at Tomsk State University
 
+![](https://github.com/turneps403/alice-app-childs-safe-behavior/blob/main/img/chlds.jpg?raw=true)
+
 **The main idea** is a voice assistant which helps children understand different **security behavior pattern** in a different environment like:
 - walking in the park
 - in underground
