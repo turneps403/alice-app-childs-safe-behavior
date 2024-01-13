@@ -14,3 +14,7 @@ This app is implemented as a part of NLP Master's degree program at [Tomsk State
 - and what not
 
 Application was built in an indea of flexability and can be easily extended.
+
+Source schema:
+
+![](https://github.com/turneps403/alice-app-childs-safe-behavior/blob/main/img/source_schema_1.png?raw=true)
