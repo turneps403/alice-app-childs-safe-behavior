@@ -22,3 +22,5 @@ go.work
 
 # No packed files
 *.zip
+
+.vstags

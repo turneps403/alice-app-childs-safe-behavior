@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"os"
 )
@@ -36,7 +37,18 @@ type Dialog struct {
 	Places []Place `json:"place"`
 }
 
-var dialog = Dialog{}
+var dialog *Dialog
+
+func DialogInstance() *Dialog {
+	if dialog == nil {
+		dialog = &Dialog{}
+	}
+	return dialog
+}
+
+// func (d *Dialog) Start() Phrase {
+// 	return d.Start
+// }
 
 func init() {
 	fileBytes, err := os.ReadFile(DIALOG_FILE)
@@ -44,18 +56,15 @@ func init() {
 		log.Fatal(err)
 	}
 
-	err = json.Unmarshal(fileBytes, &dialog)
+	d := DialogInstance()
+	err = json.Unmarshal(fileBytes, d)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	log.Printf("file was readed %v", DialogModel())
+	fmt.Printf("file was readed %v", d)
 }
 
-func DialogModel() *Dialog {
-	return &dialog
+func main() {
+	println(DialogInstance())
 }
-
-// func main() {
-// 	// println(DialogModel())
-// }
