@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"regexp"
 	"strings"
 )
 
@@ -147,9 +148,11 @@ func applyTextTTS(res *Result, phrases ...Phrase) {
 }
 
 func amongTokens(v string, tokens []string) bool {
-	v = strings.ToLower(v)
+	// using regexp instead of Levenshtein distance
+	vb := []byte(v)
 	for _, t := range tokens {
-		if v == strings.ToLower(t) {
+		re := regexp.MustCompile(`(?i)` + `(?:\A|\s|[[:punct:]])` + regexp.QuoteMeta(t) + `(?:\s|\z|[[:punct:]])`)
+		if re.Match(vb) {
 			return true
 		}
 	}
