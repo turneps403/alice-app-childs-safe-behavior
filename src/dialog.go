@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"os"
 )
@@ -21,20 +20,25 @@ type Reaction struct {
 }
 
 type Riddle struct {
+	Title    string   `json:"title"`
 	Question Phrase   `json:"question"`
 	Answers  []string `json:"answers"`
 	Reaction Reaction `json:"reaction"`
 }
 
 type Place struct {
-	Tokens  []string `json:"tokens"`
-	Start   Phrase   `json:"start"`
-	Riddles []Riddle `json:"riddles"`
+	Tokens   []string `json:"tokens"`
+	Start    Phrase   `json:"start"`
+	Riddles  []Riddle `json:"riddles"`
+	Prologue Phrase   `json:"prologue"`
+	Epilogue Phrase   `json:"epilogue"`
 }
 
 type Dialog struct {
-	Start  Phrase  `json:"start"`
-	Places []Place `json:"place"`
+	Start           Phrase  `json:"start"`
+	Places          []Place `json:"place"`
+	PlacesAvaliable Phrase  `json:"places_avaliable"`
+	Fail            Phrase  `json:"fail"`
 }
 
 var dialog *Dialog
@@ -45,10 +49,6 @@ func DialogInstance() *Dialog {
 	}
 	return dialog
 }
-
-// func (d *Dialog) Start() Phrase {
-// 	return d.Start
-// }
 
 func init() {
 	fileBytes, err := os.ReadFile(DIALOG_FILE)
@@ -61,10 +61,8 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	fmt.Printf("file was readed %v", d)
 }
 
-func main() {
-	println(DialogInstance())
-}
+// func main() {
+// 	println(DialogInstance())
+// }
