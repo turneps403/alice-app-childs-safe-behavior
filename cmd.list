@@ -1,0 +1,2 @@
+# to create zip file before upload it to the Alice service
+zip -jr app-chlds.zip src

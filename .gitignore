@@ -19,3 +19,8 @@
 
 # Go workspace file
 go.work
+
+# No packed files
+*.zip
+
+.vstags
