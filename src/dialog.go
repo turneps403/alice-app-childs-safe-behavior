@@ -28,7 +28,6 @@ type Riddle struct {
 
 type Place struct {
 	Tokens   []string `json:"tokens"`
-	Start    Phrase   `json:"start"`
 	Riddles  []Riddle `json:"riddles"`
 	Prologue Phrase   `json:"prologue"`
 	Epilogue Phrase   `json:"epilogue"`
@@ -62,7 +61,3 @@ func init() {
 		log.Fatal(err)
 	}
 }
-
-// func main() {
-// 	println(DialogInstance())
-// }
