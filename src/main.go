@@ -23,15 +23,6 @@ type RequestEvent struct {
 	} `json:"state"`
 	Request struct {
 		OriginalUtterance string `json:"original_utterance"`
-		// 	Nlu               struct {
-		// 		Tokens  []string `json:"tokens"`
-		// 		Intents map[string]struct {
-		// 			Slots map[string]struct {
-		// 				Type  string `json:"type"`
-		// 				Value string `json:"value"`
-		// 			} `json:"slots"`
-		// 		} `json:"intents"`
-		// 	} `json:"nlu"`
 	} `json:"request"`
 }
 
@@ -105,7 +96,6 @@ func Handler(ctx context.Context, event []byte) (*Response, error) {
 			sessionData.RiddleID = riddleID
 			applyTextTTS(
 				&res,
-				dialogue.Places[placeExtID-1].Start,
 				dialogue.Places[placeExtID-1].Prologue,
 				dialogue.Places[placeExtID-1].Riddles[riddleID].Question,
 			)
@@ -146,9 +136,13 @@ func applyTextTTS(res *Result, phrases ...Phrase) {
 	txt, tts := []string{}, []string{}
 	for _, p := range phrases {
 		txt = append(txt, p.Text)
-		tts = append(tts, p.TTS)
+		if p.TTS == "" {
+			tts = append(tts, p.Text)
+		} else {
+			tts = append(tts, p.TTS)
+		}
 	}
-	res.Text = strings.Join(txt, "\n\n")
+	res.Text = strings.Join(txt, "\n---\n")
 	res.TTS = strings.Join(tts, " sil<[1000]> ")
 }
 
