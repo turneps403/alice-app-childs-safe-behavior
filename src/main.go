@@ -59,13 +59,33 @@ func Handler(ctx context.Context, event []byte) (*Response, error) {
 	sessionData := input.State.SessionState
 
 	userAnswer := input.Request.OriginalUtterance
-	STOP_WORDS := []string{"стоп", "хватит", "выключись", "выход", "закончить", "заткнись", "завершить"}
-	if amongTokens(userAnswer, STOP_WORDS) {
+	if amongTokens(userAnswer, dialogue.Interrupt.Tokens) {
 		// interrupt game
 		res.EndSession = true
 		applyTextTTS(
 			&res,
-			Phrase{},
+			dialogue.Interrupt.Speech,
+		)
+	} else if amongTokens(userAnswer, dialogue.Help.Tokens) {
+		// help
+		applyTextTTS(
+			&res,
+			dialogue.Help.Speech,
+		)
+	} else if amongTokens(userAnswer, dialogue.Abilities.Tokens) {
+		// abilities
+		applyTextTTS(
+			&res,
+			dialogue.Abilities.Speech,
+		)
+	} else if sessionData.PlaceID != 0 && amongTokens(userAnswer, dialogue.Repeat) {
+		// repeat
+		placeExtID, riddleID := sessionData.PlaceID, sessionData.RiddleID
+		answer := []Phrase{}
+		answer = append(answer, dialogue.Places[placeExtID-1].Riddles[riddleID].Question)
+		applyTextTTS(
+			&res,
+			answer...,
 		)
 	} else if input.Session.New {
 		// the very start
