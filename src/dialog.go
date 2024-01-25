@@ -13,6 +13,11 @@ type Phrase struct {
 	TTS  string `json:"tts"`
 }
 
+type ReactSpeech struct {
+	Tokens []string `json:"tokens"`
+	Speech Phrase   `json:"speech"`
+}
+
 type Reaction struct {
 	Right       Phrase `json:"right"`
 	Wrong       Phrase `json:"wrong"`
@@ -34,10 +39,14 @@ type Place struct {
 }
 
 type Dialog struct {
-	Start           Phrase  `json:"start"`
-	Places          []Place `json:"place"`
-	PlacesAvaliable Phrase  `json:"places_avaliable"`
-	Fail            Phrase  `json:"fail"`
+	Start           Phrase      `json:"start"`
+	Places          []Place     `json:"place"`
+	PlacesAvaliable Phrase      `json:"places_avaliable"`
+	Fail            Phrase      `json:"fail"`
+	Interrupt       ReactSpeech `json:"interrupt"`
+	Help            ReactSpeech `json:"help"`
+	Abilities       ReactSpeech `json:"abilities"`
+	Repeat          []string    `json:"repeat"`
 }
 
 var dialog *Dialog
