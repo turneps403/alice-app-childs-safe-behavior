@@ -59,12 +59,12 @@ func Handler(ctx context.Context, event []byte) (*Response, error) {
 	sessionData := input.State.SessionState
 
 	userAnswer := input.Request.OriginalUtterance
-	for i, place := range dialogue.Places {
-    if amongTokens(userAnswer, place.Tokens) {
-        sessionData.PlaceID = 0
-        break
-    }
-  }
+	for _, place := range dialogue.Places {
+		if amongTokens(userAnswer, place.Tokens) {
+			sessionData.PlaceID = 0
+			break
+		}
+	}
 	if amongTokens(userAnswer, dialogue.Interrupt.Tokens) {
 		// interrupt game
 		res.EndSession = true
